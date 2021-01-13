@@ -80,14 +80,57 @@ public class Games
         System.out.println("You have " + checkLottery(user, lottery) + " hits.");
     }
 
-    public static void playNim(int number)
+    public static void playNim(int chips)
     {
         Scanner sc = new Scanner(System.in);
+        int user, computer;
+        while(chips > 0)
+        {
+            System.out.println("There are " + chips + " chips left");
+            System.out.println("How many chips do you take?");
+            user = sc.nextInt();
+            while(user > 3)
+            {
+                System.out.println("You can only take between 1 or 3 chips. How many do you take?");
+                user = sc.nextInt();
+            }
+            if (chips <= 3)
+            {
+                while(user > chips)
+                {
+                    System.out.println("There are only " + chips + " left. Pick a lower number");
+                    user = sc.nextInt();
+                }
+            }
+            chips -= user;
+            if (chips == 0)
+            {
+                System.out.println("You win!");
+                break;
+            }
+            System.out.println("There are " + chips + " chips left");
+            if (chips <= 3)
+            {
+                computer = generateNumber(1, chips);
+            }
+            else
+            {
+                computer = generateNumber(1, 3);    
+            }
+            System.out.println("The computer takes " + computer + " chips");
+            chips -= computer;
+            if (chips == 0)
+            {
+                System.out.println("You lose!");
+                break;
+            }
+        }
         
     }
     public static void main(String[] args)
     {
-        playLottery();
+        playNim(20);
+        //playLottery();
         /*int[] lottery = generateLottery();
         for (int num : lottery) 
         {
