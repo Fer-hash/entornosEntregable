@@ -82,6 +82,7 @@ public class Games
 
     public static void playNim(int number)
     {
+        Scanner sc = new Scanner(System.in);
         
     }
     public static void main(String[] args)
