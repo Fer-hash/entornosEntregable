@@ -5,14 +5,68 @@ import java.util.Scanner;
 
 public class Games
 {
+    public static void main(String[] args)
+    {
+        //If there's only 1 argument we assume user wants to play lottery
+        if (args.length == 1)
+        {
+            if (args[0].equals("lottery"))
+            {
+                playLottery();
+            }
+
+            else
+            {
+                System.out.println("Wrong input");
+            }
+        }
+
+        //If there are 2 arguments we assume user wants to play Nim
+        else if (args.length == 2)
+        {
+            if (args[0].equals("nim"))
+            {
+                int chips = 0;
+                try
+                {
+                    chips = Integer.parseInt(args[1]);                    
+                }
+                catch(NumberFormatException e)
+                {
+                    System.out.println("Not a valid number");
+                }
+                
+                if(chips > 0 && chips < 31)
+                {
+                    playNim(chips);                    
+                }
+                else
+                {
+                    System.out.println("Only numbers between 1 and 30");
+                }
+            }
+
+            else
+            {
+                System.out.println("Wrong input");
+            }
+        }
+        
+        else 
+        {
+            System.out.println("Wrong input");
+        }
+    }
+
+    /*This function generates a random number and takes the minimun and maximun
+    values for the range as arguments*/
     public static int generateNumber(int min, int max)
     {
-        /*This function generates a random number and takes the minimun and maximun
-        values for the range as arguments*/
         int result = min + (int)(Math.random() * (max - min + 1));
         return result;
     }
 
+    //This function generates an array of 6 unique numbers and sorts them
     public static int[] generateLottery()
     {
         int[] lottery = new int[6];
@@ -54,10 +108,12 @@ public class Games
                 }
             }
         }
+
         //Returns sorted array
         return lottery;
     }
 
+    //This function checks how many numbers coincide between both user and winner arrays
     public static int checkLottery(int[] user, int[] winner)
     {
         //This variable keeps track of the amount of numbers that coincide
@@ -80,6 +136,7 @@ public class Games
         return amount;
     }
 
+    //This function uses all other lottery functions to create the game
     public static void playLottery()
     {
         //Ask user for 6 numbers and keep them in user array
@@ -105,6 +162,7 @@ public class Games
         System.out.println("You have " + checkLottery(user, lottery) + " hits.");
     }
 
+    //This function plays the game of Nim against the computer
     public static void playNim(int chips)
     {
         Scanner sc = new Scanner(System.in);
@@ -169,24 +227,5 @@ public class Games
                 break;
             }
         }
-        
-    }
-    public static void main(String[] args)
-    {
-        int[] lottery = generateLottery();
-        for (int num : lottery)
-        {
-            System.out.println(num);
-        }
-        /*if (args.length> 0)
-        {
-            if (args[0].equals("nim"))
-            {
-                int chips;
-                chips = Integer.parseInt(args[1]);
-                playNim(chips);
-            }
-        } */
-        
     }
 }
