@@ -82,6 +82,7 @@ public class Games
 
     public static void playLottery()
     {
+        //Ask user for 6 numbers and keep them in user array
         System.out.println("Enter your 6 number combination:");
         int[] user = new int[6];
 
@@ -91,12 +92,15 @@ public class Games
             user[i] = sc.nextInt();
         }
         
+        //Generate and show winner combination
         System.out.println("This is the winner combination:");
         int[] lottery = generateLottery();
         for (int num : lottery)
         {
             System.out.print(num + " ");
         }
+        
+        //Line break and show number of hits
         System.out.println();
         System.out.println("You have " + checkLottery(user, lottery) + " hits.");
     }
@@ -104,17 +108,24 @@ public class Games
     public static void playNim(int chips)
     {
         Scanner sc = new Scanner(System.in);
-        int user, computer;
+        int user, computer; //To store number of chips substracted each turn
+
         while(chips > 0)
         {
             System.out.println("There are " + chips + " chips left");
+
+            //User turn
             System.out.println("How many chips do you take?");
             user = sc.nextInt();
+            
+            //Check user only takes up to 3 chips
             while(user > 3)
             {
                 System.out.println("You can only take between 1 or 3 chips. How many do you take?");
                 user = sc.nextInt();
             }
+
+            //If there are less than 3 chips that becomes the new max number of chips user can take
             if (chips <= 3)
             {
                 while(user > chips)
@@ -123,13 +134,21 @@ public class Games
                     user = sc.nextInt();
                 }
             }
+
+            //After pertinent checks, substract the no. of chips user chose
             chips -= user;
+
+            //Check if user won after their turn
             if (chips == 0)
             {
                 System.out.println("You win!");
                 break;
             }
+
+            //Show how many chips are left before computer takes its turn
             System.out.println("There are " + chips + " chips left");
+
+            //Check that computer cant take more than 3 or more than the no. of chips left if chips <= 3
             if (chips <= 3)
             {
                 computer = generateNumber(1, chips);
@@ -138,8 +157,12 @@ public class Games
             {
                 computer = generateNumber(1, 3);    
             }
+
+            //Show how many chips the computer took and substract them from total
             System.out.println("The computer takes " + computer + " chips");
             chips -= computer;
+
+            //Check if computer won
             if (chips == 0)
             {
                 System.out.println("You lose!");
