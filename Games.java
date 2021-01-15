@@ -144,7 +144,7 @@ public class Games
         int[] user = new int[6];
 
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < user.length; i++)
         {
             user[i] = sc.nextInt();
         }
