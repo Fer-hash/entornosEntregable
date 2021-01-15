@@ -1,3 +1,6 @@
+//Fernando Tortosa López - Development Enviroments
+//Exercise for Units 1 to 4
+
 import java.util.Scanner;
 
 public class Games
@@ -14,10 +17,28 @@ public class Games
     {
         int[] lottery = new int[6];
 
-        //Fill array with random numbers
-        for (int i = 0; i < 6; i++)
+        //Fill array with random unique numbers
+        for (int i = 0; i < lottery.length;)
         {
-            lottery[i] = generateNumber(1, 49);
+            boolean unique = true;
+            int aux;
+            aux = generateNumber(1, 49);
+
+            for (int j = 0; j < lottery.length; j++) //Check if number already exists in lottery array
+            {
+                if (aux == lottery[j])
+                {
+                    unique = false;
+                    break;
+                }
+            }
+
+            if (unique)
+            {
+                lottery[i] = aux;
+                i++; //The outermost for loop only increases if number is unique
+            }
+            
         }
 
         //Sort by Bubble sort method
@@ -129,25 +150,20 @@ public class Games
     }
     public static void main(String[] args)
     {
-        playNim(20);
-        //playLottery();
-        /*int[] lottery = generateLottery();
-        for (int num : lottery) 
+        int[] lottery = generateLottery();
+        for (int num : lottery)
         {
-            System.out.print(num + " ");    
+            System.out.println(num);
         }
-        System.out.println();
-        int[] user = new int[6];
-        for(int i = 0; i < user.length; i++)
+        /*if (args.length> 0)
         {
-            user[i] = generateNumber(1,49);   
-        }
-        for(int num : user)
-        {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-        int prueba = checkLottery(user, lottery);
-        System.out.println(prueba); */
+            if (args[0].equals("nim"))
+            {
+                int chips;
+                chips = Integer.parseInt(args[1]);
+                playNim(chips);
+            }
+        } */
+        
     }
 }
